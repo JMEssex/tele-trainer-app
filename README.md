@@ -19,7 +19,7 @@ Tele-Trainer is an app for training telemarketers. Based on the habit formation 
 um... just click the link above, nothing down here to see.
 
 ## ERD
-![](assets/erd/teletrainer_erd.jpg)
+![Entity Relationship Diagram](assets/erd/teletrainer_ERD.jpg)
 
 ## Wireframe
-![](assets/wireframe/teletrainer_wireframe.jpg)
+![Wireframe](assets/wireframe/teletrainer_wireframe.jpg)
