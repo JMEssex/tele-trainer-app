@@ -2,10 +2,11 @@ const mongoose = require(`mongoose`)
 
 // Create Hotbutton Schema:
 const hotbuttonSchema = new mongoose.Schema({
-    hotbutton: String
-  })
+  hotbutton: String
+})
 
-//
-const Hotbutton = mongoose.model(`hotbutton`, hotbuttonSchema)
+// Sets Constant For Model:
+const Hotbutton = mongoose.model(`Hotbutton`, hotbuttonSchema)
 
+// Exports Module:
 module.exports = Hotbutton
