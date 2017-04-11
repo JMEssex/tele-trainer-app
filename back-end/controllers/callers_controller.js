@@ -67,15 +67,15 @@ function destroy(req, res) {
     if (err) res.status(500).send(err)
 
     // Otherwise send caller json back with 200 success header:
-    res.status(200).send({message: `Caller Successfully Deleted, ${caller}`})
+    res.status(200).send({message: `Caller's information and data successfully deleted!`})
   })
 }
 
 module.exports =
 {
   index   : index   ,
-  create  : create  ,
-  show    : show    ,
-  update  : update  ,
-  destroy : destroy
+  create  : create  , // C
+  show    : show    , // R
+  update  : update  , // U
+  destroy : destroy   // D
 }
