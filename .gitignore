@@ -1,4 +1,4 @@
 node_modules
-_old
 .DS_Store
 .env
+speech.min.js
