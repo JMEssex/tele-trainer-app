@@ -3,7 +3,7 @@ const
   Hotbutton = require(`./Hotbutton`)
 
 // Create Caller Schema:
-const callerSchema = new mongoose.Schema({
+var callerSchema = new mongoose.Schema({
   name: String,
   callLog: String,
   hotbuttons: [{type: mongoose.Schema.Types.ObjectId, ref: 'Hotbutton'}]

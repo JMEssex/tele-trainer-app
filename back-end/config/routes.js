@@ -3,9 +3,9 @@ const
   router  = new express.Router();
 
 // Require controllers:
-var
+const
   callersCtrl = require(`../controllers/callers_controller.js`),
-  usersCtrl = require(`../controllers/users_controller.js`);
+  usersCtrl   = require(`../controllers/users_controller.js`  );
 
 // Require token authentication:
 const token = require(`../config/token_auth.js`);

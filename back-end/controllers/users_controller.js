@@ -2,7 +2,7 @@ const
   jwt     = require(`jsonwebtoken`),
   moment  = require(`moment`);
 
-var User = require(`../models/User`);
+const User = require(`../models/User`);
 
 module.exports = {
   create: create,
@@ -18,6 +18,9 @@ module.exports = {
   }
 };
 
+
+// GET /api/users
+// CREATE action to add a new user:
 function create(req, res, next) {
   console.log('  Creating user!'.yellow);
 
@@ -37,7 +40,8 @@ function create(req, res, next) {
     });
 }
 
-// Essentially, a "me" route is a show route, for the current user.
+// GET /api/me
+// SHOW action "me" route for the current user:
 function me(req, res, next) {
   console.log('  Retrieving user!'.yellow);
 

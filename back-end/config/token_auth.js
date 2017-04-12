@@ -1,8 +1,9 @@
-var jwt     = require('jsonwebtoken'),
-    moment  = require('moment'),
-    colors  = require('colors');
+const
+  jwt     = require('jsonwebtoken'),
+  moment  = require('moment'),
+  colors  = require('colors');
 
-var User = require('../models/User');
+const User = require('../models/User');
 
 
 module.exports = {

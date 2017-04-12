@@ -38,6 +38,7 @@ app.use(function(req, res, next) {
   res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
   res.header(`Access-Control-Allow-Headers`, `Content-Type,Authorization`);
 
+  // Handle "preflight" requests:
   if (`OPTIONS` == req.method) {
     res.send(200);
   } else {
