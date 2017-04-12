@@ -3,7 +3,7 @@ const
   router  = new express.Router();
 
 // Require controllers:
-const
+var
   callersCtrl = require(`../controllers/callers_controller.js`),
   usersCtrl = require(`../controllers/users_controller.js`);
 
@@ -11,8 +11,7 @@ const
 const token = require(`../config/token_auth.js`);
 
 // /api/users routes:
-router.route(`/users`)
-  .post(
+router.post(`/users`,
     // Log:
     function(req, res, next) {
       console.log();
@@ -23,13 +22,13 @@ router.route(`/users`)
     // Validations:
     usersCtrl.user.checkForFields,
     usersCtrl.user.validatePassword,
-    usersCtrl.user.validateDob,
     usersCtrl.user.checkIfAlreadyExists,
 
     // Create new user:
     usersCtrl.create
-  )
-  .get(
+  );
+
+router.get(`/users`,
     function(req, res, next) {
       console.log();
       console.log("Nearly correct request received:".blue, req.method, req.originalUrl);
@@ -65,12 +64,12 @@ router.route(`/token`)
     },
 
     // validations
-    tokenCtrl.token.checkCredentials,
-    tokenCtrl.token.checkUserExists,
-    tokenCtrl.token.validateCredentials,
+    token.token.checkCredentials,
+    token.token.checkUserExists,
+    token.token.validateCredentials,
 
     // create a new token
-    tokenCtrl.create
+    token.create
   )
   .get(
     function(req, res, next) {

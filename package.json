@@ -2,10 +2,9 @@
   "name": "Tele-trainer",
   "version": "1.0.0",
   "description": "## Description",
-  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "node ./back-end/bin/www"
   },
   "repository": {
     "type": "git",

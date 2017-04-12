@@ -1,6 +1,6 @@
-const mongoose = require(`./database`);
+// const mongoose = require(`./database`);
 
-const User = require(`../models/User`);
+var User = require(`../models/User`);
 
 User.remove({})
   .then(function() {

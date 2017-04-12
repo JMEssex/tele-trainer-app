@@ -1,7 +1,8 @@
-var jwt     = require('jsonwebtoken'),
-    moment  = require('moment');
+const
+  jwt     = require(`jsonwebtoken`),
+  moment  = require(`moment`);
 
-var User = require('../models/user');
+var User = require(`../models/User`);
 
 module.exports = {
   create: create,
@@ -20,7 +21,6 @@ module.exports = {
 function create(req, res, next) {
   console.log('  Creating user!'.yellow);
 
-  req.body.dob = Date.parse(req.body.dob);
   User
     .create(req.body)
     .then(function(user) {
@@ -63,12 +63,11 @@ function checkForFields(req, res, next) {
   if (
     !req.body.email    ||
     !req.body.name     ||
-    !req.body.password ||
-    !req.body.dob
+    !req.body.password
   ) {
     next({
       status:  422,
-      message: 'Missing required field: one of email, name, password, or dob'
+      message: 'Missing required field: one of email, name, or password'
     });
   } else {
     console.log("  All fields present…".green);
@@ -77,48 +76,16 @@ function checkForFields(req, res, next) {
 }
 
 function validatePassword(req, res, next) {
-  if (req.body.password.length < 5) {
+  if (req.body.password.length < 6) {
     next({
       status:  422,
-      message: 'Password field must have minimum of 5 characters'
+      message: 'Password field must have minimum of 6 characters'
     });
   } else {
     console.log("  Password validated:".green, req.body.password);
     next();
   }
 }
-
-// function validateDob(req, res, next) {
-//   var date = moment(req.body.dob, moment.ISO_8601);
-//   var eighteen_years_ago =
-//     moment().subtract(18, 'years').startOf('day');
-//
-//   var valid = date.isValid();
-//   var flags = date.parsingFlags();
-//
-//   if (!valid && !flags.iso) {
-//     next({
-//       status:  422,
-//       message: 'dob invalid format: not in ISO 8601. ' +
-//       'See https://en.wikipedia.org/wiki/ISO_8601#Dates.',
-//     });
-//   } else
-//   if (!valid && (flags.overflow !== -1)) {
-//     next({
-//       status:  422,
-//       message: 'dob invalid date part: year, month, or date.',
-//     });
-//   } else
-//   if (date.isAfter(eighteen_years_ago)) {
-//     next({
-//       status:  422,
-//       message: 'dob invalid: you must be 18 to enter.',
-//     });
-//   } else {
-//     console.log("  Date of birth validated:".green, req.body.dob);
-//     next();
-//   }
-// }
 
 function checkIfAlreadyExists(req, res, next) {
   User

@@ -1,4 +1,4 @@
-const
+var
   express      = require(`express`)           ,
   path         = require(`path`)              ,
   favicon      = require(`serve-favicon`)     ,
@@ -14,14 +14,14 @@ const
 
 // Load env variable from .env file:
 require('dotenv').config();
-const evn    = require(`./config/environment`);
-const routes = require(`./config/routes.js`  );
+var env    = require(`./config/environment.js`);
+var routes = require(`./config/routes.js`  );
 
 // Establish connection to mongo database:
-const mongoose = require(`./config/database.js`);
+var mongoose = require(`./config/database.js`);
 
 // Define JWTs local environment variables in express:
-const app = express();
+var app = express();
 
 app.set(`title`, env.TITLE);
 app.set(`safe-title`, env.SAFE_TITLE);
