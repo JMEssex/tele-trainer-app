@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="tele-trainer">
+  <head>
+    <meta charset="utf-8">
+    <title>Tele-Trainer</title>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/master.css">
+
+    <script src="/js/auth/jwt-decode.2.0.1.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid">
+
+      <main class="content" ui-view>
+
+      </main>
+    </div>
+
+    <footer>
+      <hr>
+      <span></span>
+    </footer>
+
+    <script src="/js/app.module.js"></script>
+    <script src="/js/app.routes.js"></script>
+    <script src="/js/navbar.controller.js"></script>
+  </body>
+</html>

@@ -50,8 +50,8 @@ app.use(function(req, res, next) {
 app.use(logger(`dev`));
 
 // // Sets the favicon ;-)
-// app.use(favicon(path.join(__dirname, `public`, `ga-favicon.ico`)));
-// app.use(express.static(path.join(__dirname, `public`)));
+app.use(favicon(path.join(__dirname, `front-end`, `tt-favicon.ico`)));
+app.use(express.static(path.join(__dirname, `front-end`)));
 
 // Parse the cookie, retrieve the session; load it on to the request:
 app.use(cookieParser());
