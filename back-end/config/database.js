@@ -1,17 +1,20 @@
-const mongoose = require(`mongoose`)
+const mongoose = require(`mongoose`);
+
+const env = require(`./environment`);
 
 // Use different database URIs based on whether an env var exists.
-var dbUri = process.env.MONGOD_URI ||
-            `mongodb://localhost/${process.env.LOCAL_DB}`
+var dbUri = env.MLAB_URI || `mongodb://localhost/${env.SAFE_TITLE}`;
 
-if (!process.env.MONGODB_URI) {
+if (!env.MLAB_URI) {
   // Check that MongoD is running...
   require(`net`).connect(27017, `localhost`).on(`error`, function() {
-    console.log("YOU MUST BOW BEFORE THE MONGOD FIRST, MORTAL!")
-    process.exit(0)
-  })
+    console.log("YOU MUST BOW BEFORE THE MONGOD FIRST, MORTAL!");
+    process.exit(0);
+  });
 }
 
-mongoose.connect(dbUri)
+if (!mongoose.connection._hasOpened) {
+  mongoose.connect(dbUri);
+}
 
-module.exports = mongoose
+module.exports = mongoose;
