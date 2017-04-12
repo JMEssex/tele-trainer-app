@@ -54,100 +54,29 @@ app.use(logger(`dev`));
 // app.use(express.static(path.join(__dirname, `public`)));
 
 // Parse the cookie, retrieve the session; load it on to the request:
-app.use(cookieParser(`howsecretshouldthisbeanyways`));
-app.use(session({
-  secret: `hopefullynobodyfindsthisinmysourcecode`,
-  saveUninitialized: true,
-  resave: true
-}));
-
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(debugReq); // Helper function below.
 
 /////// *** API ROUTES *** ///////
 
-app.use(debugReq); // Helper function below.
-
-// Root path: returns a list of possible requests:
-app.get(`/api`, function(req, res, next) {
-  console.log(); // initialized console spaceing.
-  console.log(`Request made to API root.`.blue);
-  var baseURI = `${req.protocol}:\/\/${req.get('host')}\/api`;
-  res.json({
-    token_url: `POST ${baseUri}/token`,
-    user_urls: [
-      `POST ${baseUri}/users`,
-      `GET  ${baseUri}/me`
-    ]
-  });
-});
-
 // VALIDATION: Check for correctly formed requests (content type).
-app.use([`/api/users`, `/api/token`], function(req, res, next) {
-  if (req.get(`Content-Type`) === `application/x-www-form-urlencoded`) {
-    next({
-      status:  400,
-      message: `Make sure you are not setting your request body to be x-www-form-urlencoded. Use application/json (raw)`
-    })
-  } else if (req.get(`Content-Type`) !== `application/json`) {
-    if (req.session.failedToSetContentType) {
-      req.session.failedToSetContentType++;
-    } else {
-      req.session.failedToSetContentType = 1;
-    }
-    console.log();
-    console.log(`Request made without correct content type.`.blue, req.method, req.originalUrl);
-    console.log(`  Failed attempt:`.green, req.session.failedToSetContentType);
-    if (req.session.failedToSetContentType < 10) {
-      var message = `Request body must be JSON. Set your headers; see ` +
-        `http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17`;
-    } else {
-      var message = `Add a header where 'Content-Type': 'application/json', and make sure that the body is formatted as 'raw', if it exists`;
-    }
-    next({
-      status:  400,
-      message: message
-    });
-  } else {
-    next();
-  }
-});
-
-// VALIDATION: Check that the body is correctly formatted before failing to parse (replies with good errors for JSON parsing).
-// app.use('/api', bodyParser.json());
-app.use(
-  [`/api/users`, `/api/token`],
-  bodyParser.text({type: `*/*`}),
-  function(req, res, next) {
-  if (req.body) {
-    try {
-      req.body = JSON.parse(req.body);
-    } catch (err) {
-      console.log(); // Added console spaceing:
-      console.log(`Request has a JSON body that is incorrectly formatted and failed parsing.`.blue);
-      next({
-        status:  400,
-        message: `Body failed to be parsed. JSON incorrectly formatted.`
-      });
-    }
-  }
-  next();
-});
-
-// // Make json objects available in requests:
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended: false}))
+app.use(validateContentType);
 
 // Mount routes at /api:
 app.use(`/api`, routes);
-
 
 /////// *** ERROR ROUTES *** ///////
 
 // Catches all 404 routes, either for non-existing routes or routes that have passed to it:
 app.use(function(req, res, next) {
-  next({status: 404});
+  var err = new Error(`404 Not Found`);
+  err.status = 404;
+  next(err);
 });
 
 // Error-handeling layer:
+app.use(addFailedAuthHeader)
 app.use(function(err, req, res, next) {
   delete err.statusCode;
 
@@ -167,6 +96,36 @@ app.use(function(err, req, res, next) {
   console.log(err);
   res.status(err.status).json(err);
 });
+
+/////// *** HELPER FUNCTIONS *** ///////
+
+// If the request is one of PUT, PATCH or POST, and has a body that is
+// not empty, and does not have an application/json Content-Type header, then …
+function validateContentType(req, res, next) {
+  var methods = [`PUT`, `PATCH`, `POST`];
+  if (
+    methods.indexOf(req.method) !== -1 &&
+    Object.keys(req.body).length !== 0 &&
+    !req.is(`json`)
+  ) {
+    var message = `Content-Type header must be application/json.`.yellow;
+    res.status(400).json(message);
+  } else {
+    next();
+  }
+}
+
+// When there is a 401 Unauthorized, the repsonse shall include a header
+// WWW-Authenticate that tells the client how they must authenticate
+// their requests:
+function addFailedAuthHeader(err, req, res, next) {
+  var header = {"WWW-Authenticate": "Bearer"}; // Must not use ``<-(ticks) around 'WWW-Authenticate'
+  if (err.status === 401) {
+    if (err.realm) header["WWW-Authenticate"] += ` realm="${err.realm}"`;
+    res.set(header);
+  }
+  next(err);
+}
 
 function debugReq(req, res, next) {
   debug(`Debugging request data:`.red);
