@@ -20,3 +20,40 @@
     </strong>
   </p>
 </div> <!-- sign-in-form -->
+
+<div class="sign-up-form" ng-show="vm.toggleValue">
+  <h1>Sign Up</h1>
+
+  <form ng-submit="vm.submitSignUp();">
+    <div class="form-group">
+      <label for="inputEmail1">Email address</label>
+      <input ng-model="vm.signUp.email" type="email" ng-class="{'red-border': vm.conflict}" class="form-control" id="inputEmail1" placeholder="Email">
+      <small ng-show="vm.conflict" class="text-danger"><em>Email exists…</em></small>
+    </div>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+      <input ng-model="vm.signUp.name" type="text" class="form-control" id="inputName" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword1">Password</label>
+      <input ng-model="vm.signUp.password" type="password" class="form-control" id="inputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword2">Password confirmation</label>
+      <input ng-model="vm.signUp.passwordConfirmation" type="password" class="form-control" id="inputPassword2" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+  <p>
+    <strong>
+      If you are already a user,
+      <a class="underline" ng-click="vm.toggleValue = !vm.toggleValue;"><u>Sign In</u></a>.
+    </strong>
+  </p>
+
+  <p>
+    If you can't remember your password,
+    <a class="underline"><u>request a new one</u>.</a>
+  </p>
+</div> <!-- sign-up-form -->

@@ -46,6 +46,22 @@
         );
     }
 
+    function submitLogIn() {
+      authService
+        .logIn(vm.logIn)
+        .then(
+          // on success
+          function(decodedToken) {
+            $log.info('Logged in!', decodedToken);
+            $state.go('welcome');
+          },
+          // on error
+          function(err) {
+            $log.info('Error:', err);
+          }
+        );
+    }
+
     $log.info(`SignInController loaded!`);
   }
 
