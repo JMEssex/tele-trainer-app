@@ -48,7 +48,9 @@
 
     function submitLogIn() {
       authService
-        .logIn(vm.logIn)
+        .logIn(vm.logIn, function() {
+          console.log(vm.login)
+        })
         .then(
           // on success
           function(decodedToken) {
