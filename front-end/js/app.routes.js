@@ -22,6 +22,12 @@
       .state(`profile`, {
         url: `/profile`,
         templateUrl: `/templates/profile.html`
+      })
+      .state(`dashboard`, {
+        url: `/dashboard`,
+        templateUrl: `/templates/dashboard.html`,
+        controller: `DashboardController`,
+        controllerAs: `vm`
       });
 
     $urlRouterProvider.otherwise(`/`);

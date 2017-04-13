@@ -1,2 +1,5 @@
-<h1>Welcome to Tele-Trainer</h1>
-<p>Please sign in to see your dashboard.</p>
+<h1>Welcome to Tele-Trainer!</h1>
+<div class="container" ng-controller="NavbarController as vm">
+  <p ng-hide="vm.authService.isLoggedIn()">Please sign in to access your dashboard.</p>
+  <p ng-show="vm.authService.isLoggedIn()">Click on "<a ui-sref="dashboard">DASHBOARD</a>" to get back to work.</p>
+</div>

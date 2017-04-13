@@ -1,0 +1,19 @@
+<p ng-hide="vm.authService.isLoggedIn()">Please sign in to access your dashboard.</p>
+<div class="wrapper-large" ng-show="vm.authService.isLoggedIn()">
+  <h1>DASHBOARD TITLE!!</h1>
+  <section class="grid">
+
+    <div class="callLogs-view" style="border: 1px solid black; width: 400px; height: 400px;">
+      CALL TRANSCRIPTION
+    </div>
+
+    <div id="hotButtons-view" style="border: 1px solid black; width: 400px; height: 400px;">
+      HOTBUTTON LIST
+    </div>
+
+    <div id="scripts-view" style="border: 1px solid black; width: 400px; height: 400px;">
+      SCRIPTS
+    </div>
+
+  </section>
+</div> <!-- div.large-wrapper -->

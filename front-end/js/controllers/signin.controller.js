@@ -36,7 +36,7 @@
           // On Success:
           function(decodedToken) {
             $log.info(`Logged in!`, decodedToken);
-            $state.go(`homepage`);
+            $state.go(`dashboard`);
           },
           // On Error:
           function(err) {
@@ -52,12 +52,13 @@
         .then(
           // on success
           function(decodedToken) {
-            $log.info('Logged in!', decodedToken);
-            $state.go('welcome');
+            $log.info(`Logged in!`, decodedToken);
+            $state.go(`dashboard`);
           },
           // on error
           function(err) {
-            $log.info('Error:', err);
+            $log.info(`Error:`, err);
+            vm.toggleValue = !vm.toggleValue;
           }
         );
     }
