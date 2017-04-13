@@ -1,7 +1,8 @@
 const
   jwt     = require('jsonwebtoken'),
   moment  = require('moment'),
-  colors  = require('colors');
+  colors  = require('colors'),
+  dotenv  = require('dotenv');
 
 const User = require('../models/User');
 

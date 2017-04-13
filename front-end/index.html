@@ -4,18 +4,28 @@
     <meta charset="utf-8">
     <title>Tele-Trainer</title>
 
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/master.css">
 
     <script src="/js/auth/jwt-decode.2.0.1.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+
 
   </head>
   <body>
     <div class="container-fluid">
+      <header ng-controller="NavbarController as vm">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <a ui-sref="homepage" class="navbar-brand">Dashboard</a>
+            <button ng-hide="vm.authService.isLoggedIn()" ui-sref="signin" type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
+            <button ng-show="vm.authService.isLoggedIn()" ng-click= "vm.authService.logOut()" type="button" class="btn btn-default navbar-btn navbar-right">Sign out</button>
+          </div>
+        </nav>
+      </header>
 
       <main class="content" ui-view>
 
@@ -27,8 +37,18 @@
       <span></span>
     </footer>
 
+
     <script src="/js/app.module.js"></script>
     <script src="/js/app.routes.js"></script>
+    <script src="/js/config/app.debug.js"></script>
+    <script src="/js/config/app.httpInterceptors.js"></script>
+    <script src="/js/config/authErrorRedirect.service.js"></script>
+    <script src="/js/config/jsonHeaders.service.js"></script>
+    <script src="/js/config/tokenSigning.service.js"></script>
+    <script src="/js/auth/token.service.js"></script>
+    <script src="/js/auth/auth.service.js"></script>
+    <script src="/js/auth/user.service.js"></script>
+    <script src="/js/signin.controller.js"></script>
     <script src="/js/navbar.controller.js"></script>
   </body>
 </html>

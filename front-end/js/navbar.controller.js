@@ -1,9 +1,9 @@
 (function() {
   `use strict`;
-
+  console.log("Loading Navbar controller...")
   angular
     .module(`tele-trainer`)
-    .controller(`NavbarController`, NavbarController);
+    .controller('NavbarController', NavbarController);
 
   NavbarController.$inject = [`$log`, `authService`];
 
@@ -14,4 +14,4 @@
 
     $log.info(`NavbarController loaded!`);
   }
-});
+})();

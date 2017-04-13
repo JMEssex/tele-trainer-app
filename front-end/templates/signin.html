@@ -1,0 +1,22 @@
+<div class="sign-in-form" ng-hide="vm.toggleValue">
+  <h1>Sign In</h1>
+
+  <form ng-submit="vm.submitLogIn();" name="signInForm" novalidate>
+    <div class="form-group">
+      <lable for="inputEmail">Email Address</lable>
+      <input ng-model="vm.logIn.email" type="email" ng-model="email" name="email" required class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Password</label>
+      <input ng-model="vm.logIn.password" type="password" ng-model="password" name="password" required class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+    <button type="submit" ng-disabled="signInForm.$invalid" class="btn btn-default">Submit</button>
+  </form>
+
+  <p>
+    <strong>
+      If you are not a user yet,
+      <a class="underline" ng-click="vm.toggleValue = !vm.toggleValue;"><u>Sign Up</u></a>.
+    </strong>
+  </p>
+</div> <!-- sign-in-form -->
