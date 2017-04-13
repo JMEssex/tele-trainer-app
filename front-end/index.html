@@ -22,8 +22,9 @@
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
             <a ui-sref="homepage" class="navbar-brand">Dashboard</a>
-            <button ng-hide="vm.authService.isLoggedIn()" ui-sref="signin" type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
-            <button ng-show="vm.authService.isLoggedIn()" ng-click= "vm.authService.logOut()" type="button" class="btn btn-default navbar-btn navbar-right">Sign out</button>
+            <button id="login-button" ng-hide="vm.authService.isLoggedIn()" ui-sref="signin" type="button" class="btn btn-default navbar-btn navbar-right">Sign in</button>
+            <button id="signout-button"ng-show="vm.authService.isLoggedIn()" ng-click= "vm.authService.logOut()" type="button" class="btn btn-default navbar-btn navbar-right">Sign out</button>
+            <button id="profile-button"ng-show="vm.authService.isLoggedIn()" ui-sref="profile" type="button" class="btn btn-default navbar-btn navbar-right">Profile</button>
           </div>
         </nav>
       </header>
@@ -31,7 +32,7 @@
       <main class="content" ui-view>
 
       </main>
-    </div>
+    </div> <!-- div.container-fluid -->
 
     <footer>
       <hr>
