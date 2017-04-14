@@ -10,7 +10,7 @@
   function tokenService($log, $window) {
     $log.info(`token service loaded!`);
 
-    var SECRET_KEY = `dontbenaughtyandlookatthis`;
+    var TOKEN_KEY = `token`;
     var service = {
       store:    store,
       retrieve: retrieve,
@@ -20,12 +20,12 @@
     return service;
 
     function store(token) {
-      $window.localStorage.setItem(SECRET_KEY, token);
+      $window.localStorage.setItem(TOKEN_KEY, token);
       $log.info("token stored, local storage: ", $window.localStorage);
     }
 
     function retrieve() {
-      return $window.localStorage.getItem(SECRET_KEY);
+      return $window.localStorage.getItem(TOKEN_KEY);
     }
 
     function decode() {
@@ -33,7 +33,7 @@
     }
 
     function destroy() {
-      $window.localStorage.removeItem(SECRET_KEY);
+      $window.localStorage.removeItem(TOKEN_KEY);
       console.log("token destroyed, local storage: ", $window.localStorage);
     }
   }

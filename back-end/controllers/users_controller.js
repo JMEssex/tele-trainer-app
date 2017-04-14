@@ -113,6 +113,11 @@ function checkIfAlreadyExists(req, res, next) {
 // ************************* AUTH VALIDATIONS *************************
 
 function checkForTokenInHeader(req, res, next) {
+  console.log(req.headers)
+  console.log("++++++++++=========================================================")
+  // console.log(res)
+  // console.log("========================================================")
+
   var authHeader = req.get('Authorization'),
       method,
       token;
@@ -132,19 +137,16 @@ function checkForTokenInHeader(req, res, next) {
   }
 
   if (!authHeader) {
-    if (req.session.missingAuth) {
-      req.session.missingAuth++;
-    } else {
-      req.session.missingAuth = 1;
-    }
-    console.log(`  Failed attempt:`.green, req.session.missingAuth);
-    if (req.session.missingAuth < 10) {
-      var message = 'Authorization failed (invalid_request): missing necessary header. ' +
-                    'See https://tools.ietf.org/html/rfc6750#section-2.1';
-    } else {
+
+    // req.missingAuth += 1;
+    // console.log(`  Failed attempt:`.green, req.session.missingAuth);
+    // if (req.missingAuth < 10) {
+      // var message = 'Authorization failed (invalid_request): missing necessary header. ' +
+      //               'See https://tools.ietf.org/html/rfc6750#section-2.1';
+    // } else {
       var message = "Add a header 'Authorization': '...', where the second " +
                     "part is a string of your method and token: 'Method token.token.token'";
-    }
+    // }
     next({
       status:  400,
       message: message

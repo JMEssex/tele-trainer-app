@@ -5,14 +5,24 @@
 
     <div class="callLogs-view" style="border: 1px solid black; width: 400px; height: 400px;">
       CALL TRANSCRIPTION
-      <!-- <form ng-submit="vm.submitCaller();" name="callerNameForm">
+      <form ng-submit="vm.submitCaller();" name="callerNameForm" ng-hide="vm.toggleCurrentCaller">
         <div class="form-group">
           <lable for="inputCallerName">Caller Name</lable>
           <input ng-model="vm.currentCaller.name" type="text" ng-model="name" name="name" required class="form-control" id="inputCallerName" placeholder="Current Caller's Name">
         </div>
         <button type="submit" ng-disabled="callerNameForm.$invalid" class="btn btn-default">Register Caller</button>
-      </form> -->
+      </form>
+
+      <form ng-submit="vm.submitCallerTranscription();" name="callerLogForm" ng-show="vm.toggleCurrentCaller">
+        <div class="form-group">
+          <lable for="transcribeCallLog">Current Caller: {{vm.currentCaller.name}}</lable>
+          <textarea ng-model="vm.currentCaller.callLog" ng-model="callLog" name="callLog" class="form-control" id="inputCallerName" placeholder="Current Caller's Transcription..." rows="8" cols="80" form="callerLogForm"></textarea>
+        </div>
+        <button type="submit" ng-disabled="callerNameForm.$invalid" class="btn btn-default">Log Transcription</button>
+        <button type="submit" ng-disabled="callerNameForm.$invalid" ng-click="vm.endCall()" class="btn btn-default">End Call</button>
+      </form>
     </div>
+
 
     <div id="hotButtons-view" style="border: 1px solid black; width: 400px; height: 400px;">
       HOTBUTTON LIST

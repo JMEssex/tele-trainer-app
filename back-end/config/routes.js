@@ -46,6 +46,7 @@ router.route(`/me`)
     },
 
     // Validations:
+    // token.authenticate,
     usersCtrl.auth.checkForTokenInHeader,
     usersCtrl.auth.validateToken,
 
